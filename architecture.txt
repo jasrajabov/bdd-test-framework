@@ -1,0 +1,12 @@
+
+
+LOCAL FILES
+    |
+    |
+  file path handler --> generates data
+    |
+    |
+  xml parser --> parses xml
+    |
+    |
+  create file ---> creates file
