@@ -16,6 +16,10 @@ class ReportGenerator():
 
     def handle_files(self):
         files = file_and_path_finder()
+        if files:
+            print('Found file to parse! Parsing...')
+        else:
+            print('No file to parse...')
         for each_file in files:
             file = files[each_file]
             parsed = parse_xml(file['path'])
