@@ -1,7 +1,7 @@
 from report_engine import ReportGenerator
 import time
 
-app = ReportGenerator()
+app = ReportGenerator('Desktop/ftp-files', 'Desktop/output_files')
 
 
 

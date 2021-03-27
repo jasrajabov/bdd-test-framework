@@ -3,16 +3,19 @@ from collections import defaultdict
 import xml.etree.ElementTree as Xet
 import pandas as pd
 
-def file_and_path_finder():
+def file_and_path_finder(path):
 
     d = defaultdict(lambda: None)
 
-    desktop = path_creator("Desktop/ftp-files")
-    files = os.scandir(desktop)
+    files = os.scandir(path)
     for data in enumerate(files):
         num = data[0]
         file = data[1]
-        if file.is_file() and not file.name.startswith('parsed'):
+        if all([
+                file.is_file(),
+                not file.name.startswith('parsed'),
+                isXml(file.name)
+        ]):
             """this will replace filename to parsed"""
             splitted = file.path.split('/')
             splitted[-1] = 'parsed_' + splitted[-1]
@@ -48,4 +51,5 @@ def path_creator(folder_name):
     path = os.path.expanduser(f"~/{folder_name}")
     return path
 
-
+def isXml(filename):
+    return filename.endswith('.xml')

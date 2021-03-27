@@ -1,4 +1,4 @@
-
+Architecture
 
 LOCAL FILES
     |
@@ -10,3 +10,12 @@ LOCAL FILES
     |
     |
   create file ---> creates file
+
+
+
+  TO DO:
+
+  1. Take parser out of utils and make a separate file
+  2. Implement Logs
+  3. Implement batch processing
+  4. Create tests to check report content
