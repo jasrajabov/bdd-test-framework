@@ -3,6 +3,11 @@ import os
 from src.utils import path_creator, file_and_path_finder
 
 def copy_file_to_dest(source, destination):
+    """
+    :param source: path of the source file to be copied from
+    :param destination: path of the destination files to be copied to
+    :return: returns list of files that were copied
+    """
     if not destination:
         raise TypeError('Missing destination path!')
 
@@ -19,6 +24,13 @@ def copy_file_to_dest(source, destination):
     return list_of_file_names
 
 def report_presence_check(path):
+
+    """
+    :param path: path you to be checked
+    :return: returns list of csv files in the folder
+    :TODO: we can enhance it to take any file
+    """
+
     res = []
     path = path_creator(path)
     files = os.scandir(path)
@@ -32,3 +44,23 @@ def report_presence_check(path):
         ]):
             res.append(file.name)
     return res
+
+
+from dicttoxml import dicttoxml
+def dict_to_xml(dict, filename, dest_folder):
+
+    """
+    :param dict: takes a dictionary to be converted for xml
+    :param filename: filename you want xml to be saved as
+    :param dest_folder: destination folder
+    :return: saves xml file in the folder and returns xml file
+    """
+
+    xml = dicttoxml(dict)
+    xml_decode = xml.decode()
+    path = path_creator(dest_folder)
+    xmlfile = open(f'{path}/{filename}', "w")
+    xmlfile.write(xml_decode)
+    xmlfile.close()
+    return xml
+

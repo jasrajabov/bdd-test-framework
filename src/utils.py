@@ -7,7 +7,7 @@ def file_and_path_finder(path):
 
     d = defaultdict(lambda: None)
 
-    files = os.scandir(path)
+    files = scand_dir(path)
     for data in enumerate(files):
         num = data[0]
         file = data[1]
@@ -31,14 +31,22 @@ def delete_file(file):
 
 
 def parse_xml(file):
-    xmlparse = Xet.parse(file)
-    root = xmlparse.getroot()
-    data = {
-        'id_type': root[0].find('type').text,
-        'id_value': root[0].find('type').text,
-        'name': root[1].text,
-        'lastname': root[2].text
-    }
+
+    """
+    root[0] - <tx>
+                </tx>
+    """
+    try:
+        xmlparse = Xet.parse(file)
+        root = xmlparse.getroot()
+        data = {
+            'id_type': root[0][0].find('type').text,
+            'id_value': root[0][0].find('value').text,
+            'name': root[0][1].text,
+            'lastname': root[0][2].text
+        }
+    except:
+        Xet.ParseError('Failed to parse xml!')
 
     return data
 
@@ -53,3 +61,10 @@ def path_creator(folder_name):
 
 def isXml(filename):
     return filename.endswith('.xml')
+
+def scand_dir(path):
+    """
+    :param path: folder to be scanned
+    :return: list of file objects in the folder
+    """
+    return os.scandir(path)

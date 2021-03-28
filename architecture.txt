@@ -19,3 +19,4 @@ LOCAL FILES
   2. Implement Logs
   3. Implement batch processing
   4. Create tests to check report content
+  5. Add test step that dynamically creates xml file to test
