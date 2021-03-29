@@ -5,7 +5,7 @@ import pandas as pd
 
 def file_and_path_finder(path):
 
-    d = defaultdict(lambda: None)
+    _dict = defaultdict(lambda: None)
 
     files = scand_dir(path)
     for data in enumerate(files):
@@ -21,17 +21,19 @@ def file_and_path_finder(path):
             splitted[-1] = 'parsed_' + splitted[-1]
             new_path = "/".join(splitted)
 
-            d[str(num)] = {'path': new_path, 'name': file.name}
+            _dict[str(num)] = {'path': new_path, 'name': file.name}
             os.rename(file.path, new_path)
-    return d
+    return _dict
 
 
 def delete_file(file):
-    return os.remove(file)
+    if os.path.isfile():
+        return os.remove(file)
 
 
 def parse_xml(file):
 
+    data = None
     """
     root[0] - <tx>
                 </tx>
@@ -46,7 +48,7 @@ def parse_xml(file):
             'lastname': root[0][2].text
         }
     except:
-        Xet.ParseError('Failed to parse xml!')
+        raise Xet.ParseError('Failed to parse xml!')
 
     return data
 
