@@ -1,9 +1,11 @@
-pipeline {
-    agent { docker { image 'python:3.5.1' } }
+pipline {
+    agent none
     stages {
-        stage('build') {
-            steps {
-                sh 'python --version'
+        stage('Build') {
+            agent {
+                docker {
+                    image 'python:2-alpine'
+                }
             }
         }
     }
