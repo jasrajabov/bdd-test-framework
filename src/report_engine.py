@@ -1,31 +1,50 @@
 from src.utils import file_and_path_finder, parse_xml, delete_file, create_csv_file, path_creator
 import xml.etree.ElementTree as Xet
 import datetime
+import logging
+import time
+
+logger = logging.getLogger(__name__)
+
+
+
 
 
 
 class ReportGenerator():
 
-    def __init__(self, input_path, output_path):
-        try:
-            self.output_file_path = path_creator(output_path)
-            self.input_file_path = path_creator(input_path)
-        except:
-            raise FileNotFoundError('Folder does not exist!')
+    global retry
+    retry = 5
 
+    def __init__(self, input_path, output_path):
+        self.output_file_path = path_creator(output_path)
+        self.input_file_path = path_creator(input_path)
+        logger.info(f'Paths: Input: {self.output_file_path} Output: {self.input_file_path} paths were passed!')
 
 
     def handle_files(self):
-        files = file_and_path_finder(self.input_file_path)
+        files = None
+        allowance = 5
+        try:
+            files = file_and_path_finder(self.input_file_path)
+        except FileNotFoundError:
+            while allowance != 0:
+                logger.error(f'{self.output_file_path} or {self.input_file_path} folders do not exist! Retrying.... {allowance} retries left!')
+                allowance -= 1
+                time.sleep(5)
+                if allowance == 0:
+                    logger.error('Maximum retries have been reached! Termination session!')
+                    raise RuntimeError
+
         if files:
-            print('Found file to parse! Parsing...')
+            logger.info('Found file to parse! Parsing...')
+            for each_file in files:
+                file = files[each_file]
+                parsed = parse_xml(file['path'])
+                create_csv_file(parsed, f'{self.output_file_path}/reportFile_{file["name"].split(".")[0]}.csv')
         else:
-            print('No file to parse...')
-        for each_file in files:
-            file = files[each_file]
-            parsed = parse_xml(file['path'])
-            create_csv_file(parsed, f'{self.output_file_path}/reportFile_{file["name"].split(".")[0]}.csv')
-            # delete_file(file['path'])
+            logger.info('No file to parse...')
+
 
     def run(self):
         return self.handle_files()
