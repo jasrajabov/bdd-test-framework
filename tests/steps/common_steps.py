@@ -1,6 +1,6 @@
 from behave import given, when, then
 from src.report_engine import ReportGenerator
-from tests.test_utils import copy_file_to_dest, file_and_path_finder, path_creator, report_presence_check, \
+from tests.utils_bdd import copy_file_to_dest, file_and_path_finder, path_creator, report_presence_check, \
     dict_to_xml
 
 @given(u'following paths')
