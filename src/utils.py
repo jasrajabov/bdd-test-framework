@@ -50,6 +50,9 @@ def parse_xml(file):
     except:
         raise Xet.ParseError('Failed to parse xml!')
 
+    if not validate_integer(data['id_value']):
+        raise ValueError('Id value is not integer and cannot be none!')
+
     return data
 
 def create_csv_file(data, path):
@@ -70,3 +73,12 @@ def scand_dir(path):
     :return: list of file objects in the folder
     """
     return os.scandir(path)
+
+def validate_integer(value):
+    return value.isdigit()
+
+def save_as_file(content, filename, filetype, location):
+    file = open(f"{location}/{filename}.{filetype}", "w")
+    file.write(content)
+    file.close()
+    return file

@@ -24,7 +24,7 @@ def step_impl(context, file):
                              {
                                  "id": {
                                      "type": "random",
-                                     "value": "abc"
+                                     "value": 123
                                  },
                                  "name": "H",
                                  "lastname": "Pk"
