@@ -1,14 +1,9 @@
-from src.utils import file_and_path_finder, parse_xml, delete_file, create_csv_file, path_creator
-import xml.etree.ElementTree as Xet
-import datetime
+from src.utils import *
 import logging
 import time
+from src.db_manager import connect_to_db
 
 logger = logging.getLogger(__name__)
-
-
-
-
 
 
 class ReportGenerator():
@@ -20,6 +15,8 @@ class ReportGenerator():
         self.output_file_path = path_creator(output_path)
         self.input_file_path = path_creator(input_path)
         logger.info(f'Paths: Input: {self.output_file_path} Output: {self.input_file_path} paths were passed!')
+        connect_to_db()
+        logger.info('Successfully connected to DB!')
 
 
     def handle_files(self):
