@@ -5,11 +5,7 @@ from src.db_manager import connect_to_db
 
 logger = logging.getLogger(__name__)
 
-
 class ReportGenerator():
-
-    global retry
-    retry = 5
 
     def __init__(self, input_path, output_path):
         self.output_file_path = path_creator(output_path)

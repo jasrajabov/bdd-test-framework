@@ -3,6 +3,8 @@ from src.report_engine import ReportGenerator
 from tests.utils_bdd import copy_file_to_dest, file_and_path_finder, path_creator, report_presence_check, \
     dict_to_xml
 
+
+
 @given(u'following paths')
 def step_impl(context):
     context.test_file_path = context.table[0]['input_path']
