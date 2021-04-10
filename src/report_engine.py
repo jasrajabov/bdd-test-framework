@@ -12,7 +12,6 @@ class ReportGenerator():
         self.input_file_path = path_creator(input_path)
         logger.info(f'Paths: Input: {self.output_file_path} Output: {self.input_file_path} paths were passed!')
         connect_to_db()
-        logger.info('Successfully connected to DB!')
 
 
     def handle_files(self):
