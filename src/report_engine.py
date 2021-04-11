@@ -1,17 +1,18 @@
 from src.utils import *
 import logging
 import time
-from src.db_manager import connect_to_db
+from src.db_manager import dbManager
 
 logger = logging.getLogger(__name__)
 
+db = dbManager()
 class ReportGenerator():
 
     def __init__(self, input_path, output_path):
         self.output_file_path = path_creator(output_path)
         self.input_file_path = path_creator(input_path)
         logger.info(f'Paths: Input: {self.output_file_path} Output: {self.input_file_path} paths were passed!')
-        connect_to_db()
+        db.connect_to_db()
 
 
     def handle_files(self):
@@ -33,6 +34,7 @@ class ReportGenerator():
             for each_file in files:
                 file = files[each_file]
                 parsed = parse_xml(file['path'])
+                db.insert_db_record(parsed)
                 create_csv_file(parsed, f'{self.output_file_path}/reportFile_{file["name"].split(".")[0]}.csv')
         else:
             logger.info('No file to parse...')
