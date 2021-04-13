@@ -51,5 +51,25 @@ def test_create_table(mocked_conn):
     mocked_conn().commit.assert_called_once()
     _mock.close.assert_called_once()
 
+@mock.patch('src.db_manager.dbManager.db_connect_retry')
+@mock.patch('src.db_manager.random')
+@mock.patch('src.db_manager.logger')
+def test_insert_row(mock_log, mock_random, mocked_conn):
+    _mock = mock.Mock()
+    mocked_conn().cursor.return_value = _mock
+    _mock.execute.return_value = None
+    data = {'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd'}
+    mock_random.randint.return_value = 7
+    dbManager().insert_db_record(data)
+    mocked_conn.assert_called()
+    _mock.execute.assert_called_once()
+    _mock.execute.assert_called_with("""INSERT INTO REPORT (TX_ID, ID_TYPE, ID_VALUE, NAME, LASTNAME) VALUES (%s,%s,%s,%s,%s)""", [7, 'a', 'b', 'c', 'd'])
+
+    _mock.execute.side_effect = Exception()
+    dbManager().insert_db_record(data)
+    mock_log.error.assert_called()
+
+
+
 
 

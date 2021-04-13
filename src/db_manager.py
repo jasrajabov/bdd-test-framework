@@ -1,7 +1,7 @@
 import psycopg2
 from config import db_config
 import logging
-
+import random
 import time
 
 logger = logging.getLogger(__name__)
@@ -61,16 +61,18 @@ class dbManager():
         conn = self.db_connect_retry()
         cur = conn.cursor()
         try:
-            query = """INSERT INTO REPORT (TX_ID, ID_TYPE, ID_VALUE, NAME, LASTNAME) VALUES (%s,%s,%s,%s,%s,)"""
-            record_to_insert = set()
+            query = """INSERT INTO REPORT (TX_ID, ID_TYPE, ID_VALUE, NAME, LASTNAME) VALUES (%s,%s,%s,%s,%s)"""
+            record_to_insert = []
+            ###DELETE MEE ASAAAAP!!!!
+            record_to_insert.append(random.randint(1,1000))
             for key in data:
-                record_to_insert.add(data[key])
+                record_to_insert.append(data[key])
 
             cur.execute(query, record_to_insert)
 
             conn.commit()
             count = cur.rowcount
-            logger.info(count, "Record inserted successfully into mobile table")
+            logger.info("Record inserted successfully into mobile table")
 
         except (Exception, psycopg2.Error) as error:
             logger.error(error)
