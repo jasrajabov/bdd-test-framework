@@ -76,3 +76,24 @@ class dbManager():
 
         except (Exception, psycopg2.Error) as error:
             logger.error(error)
+
+    def query_db_record(self, data):
+        conn = self.db_connect_retry()
+        cur = conn.cursor()
+        try:
+            print(data['name'])
+            print(data['lastname'])
+            query = "SELECT ID_TYPE, ID_VALUE, NAME, LASTNAME FROM REPORT WHERE NAME = '{}' AND LASTNAME = '{}'".format(
+                data['name'], data['lastname']
+            )
+
+
+            cur.execute(query)
+
+            count = cur.rowcount
+            logger.info("Record inserted successfully into mobile table")
+            data = cur.fetchone()
+            if data:
+                return data
+        except (Exception, psycopg2.Error) as error:
+            logger.error(error)
