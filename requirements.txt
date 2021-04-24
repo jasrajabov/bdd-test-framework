@@ -22,4 +22,4 @@ pytest-cov==2.6.1
 pytest-flakes==2.0.0
 pytest-pep8
 pytest-pythonpath
-psycopg2
+psycopg2-binary
