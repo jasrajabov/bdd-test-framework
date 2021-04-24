@@ -25,6 +25,7 @@ class dbManager():
         if conn is not None:
             conn.close()
             logger.info('Database connection closed!')
+        return conn
 
     def db_connect_retry(self):
         conn = None

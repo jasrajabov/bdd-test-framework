@@ -63,3 +63,8 @@ def step_impl(context):
     context.db_manager = dbManager()
     db_query_result = context.db_manager.query_db_record(context.test_dict['tx'])
     assert db_query_result is not None
+
+@given(u'db is up and running')
+def step_impl(context):
+    conn = context.db_manager = dbManager()
+    assert conn is not None

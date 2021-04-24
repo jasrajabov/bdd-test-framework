@@ -1,5 +1,8 @@
 Feature: XML is parsed
 
+  Background: db is up
+    Given db is up and running
+
   Scenario Outline: Test xml is parsed
     Given following paths input_path and output_path
       | input_path | output_path |
