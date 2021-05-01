@@ -5,7 +5,8 @@ pipeline {
             steps {
                 echo 'Executing pytest unittest'
                 sh 'ls'
-//                 sh 'pip install -r requirements.txt'
+                sh 'source venv/bin/activate'
+                sh 'pip install -r requirements.txt'
             }
         }
     }
