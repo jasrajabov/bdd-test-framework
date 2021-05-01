@@ -7,7 +7,7 @@ pipeline {
                 sh 'ls'
                 sh 'source venv/bin/activate'
                 sh 'pip3 install -r requirements.txt --user'
-                sh 'python3 pytest'
+                sh 'python3 -m pytest'
             }
         }
         stage('Behave') {
