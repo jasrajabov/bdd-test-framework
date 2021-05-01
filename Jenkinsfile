@@ -4,7 +4,8 @@ pipeline {
         stage('Pytest') {
             steps {
                 echo 'Executing pytest unittest'
-                sh 'pip install -r requirements.txt'
+                ls
+//                 sh 'pip install -r requirements.txt'
             }
         }
     }
