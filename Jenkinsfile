@@ -6,7 +6,7 @@ pipeline {
                 echo 'Executing pytest unittest'
                 sh 'ls'
                 sh 'source venv/bin/activate'
-                sh 'pip3 install -r requirements.txt'
+                sh 'pip3 install -r requirements.txt --user'
             }
         }
     }
