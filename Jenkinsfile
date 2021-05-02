@@ -20,7 +20,7 @@ pipeline {
     post {
         always {
             emailext body: 'Test Message',
-            subject: 'Test Subject',
+            subject: '$DEFAULT_SUBJECT',
             to: 'jas.rajabov@gmail.com'
         }
     }
