@@ -19,7 +19,7 @@ pipeline {
     }
     post {
         always {
-            mail to:"jas.rajabov@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build "
+            mail to:'jas.rajabov@gmail.com', subject:"${currentBuild.fullDisplayName}", body: "Build "
         }
     }
 }
