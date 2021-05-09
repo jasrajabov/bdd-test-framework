@@ -1,2 +1,5 @@
 *.log
 htmlcov
+test_files
+INPUT_FILES
+OUTPUT_FILES

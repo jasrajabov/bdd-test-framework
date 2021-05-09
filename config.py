@@ -1,6 +1,8 @@
 from configparser import ConfigParser
 import os
 
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 def db_config():
     db = 'DB'
     if isTestEnv():

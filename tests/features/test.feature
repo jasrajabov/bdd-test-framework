@@ -6,7 +6,7 @@ Feature: XML is parsed
   Scenario Outline: Test xml is parsed
     Given following paths input_path and output_path
       | input_path | output_path |
-      | Desktop/test_files   | Desktop/test_output_files |
+      | test_files   | test_output_files |
     When test xml <input_file> is created
     And App is launched
     Then xml parser parses the file and generates <output_file>
@@ -20,7 +20,7 @@ Feature: XML is parsed
   Scenario Outline: test db saving
     Given following paths input_path and output_path
       | input_path | output_path |
-      | Desktop/test_files   | Desktop/test_output_files |
+      | test_files   | test_output_files |
     When test xml <input_file> is created with following details: <name>, <lastname>, <id_type>, <id_value>
     And App is launched
     Then xml parser parses the file and generates <output_file>

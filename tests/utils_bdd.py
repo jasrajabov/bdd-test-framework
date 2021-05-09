@@ -11,14 +11,11 @@ def copy_file_to_dest(source, destination):
     if not destination:
         raise TypeError('Missing destination path!')
 
-    test_files_source = path_creator(source)
-    destination_path = path_creator(destination)
-
-    files = file_and_path_finder(test_files_source)
+    files = file_and_path_finder(source)
     list_of_file_names = []
     for file in files:
         test_file_path = file['path']
-        shutil.copyfile(test_file_path, destination_path)
+        shutil.copyfile(test_file_path, destination)
         list_of_file_names.append(file['name'])
 
     return list_of_file_names
@@ -32,7 +29,6 @@ def report_presence_check(path):
     """
 
     res = []
-    path = path_creator(path)
     files = os.scandir(path)
     for data in enumerate(files):
         num = data[0]
@@ -58,8 +54,7 @@ def dict_to_xml(dict, filename, dest_folder):
 
     xml = dicttoxml(dict)
     xml_decode = xml.decode()
-    path = path_creator(dest_folder)
-    xmlfile = open(f'{path}/{filename}', "w")
+    xmlfile = open(f'{dest_folder}/{filename}', "w")
     xmlfile.write(xml_decode)
     xmlfile.close()
     return xml

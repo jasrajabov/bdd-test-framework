@@ -3,13 +3,21 @@ from src.report_engine import ReportGenerator
 from tests.utils_bdd import copy_file_to_dest, file_and_path_finder, path_creator, report_presence_check, \
     dict_to_xml
 from src.db_manager import *
+from config import ROOT_DIR
+import os
+from src.utils import check_if_folder_exists
 
 
 
 @given(u'following paths input_path and output_path')
 def step_impl(context):
-    context.test_file_path = context.table[0]['input_path']
-    context.output_files_path = context.table[0]['output_path']
+
+    context.output_files_path = ROOT_DIR + '/tests/test_data/' + context.table[0]['output_path']
+    context.test_file_path = ROOT_DIR + '/tests/test_data/' + context.table[0]['input_path']
+    if not check_if_folder_exists(context.output_files_path):
+        os.mkdir(context.output_files_path)
+    if not check_if_folder_exists(context.test_file_path):
+        os.mkdir(context.test_file_path)
 
 @when(u'App is launched')
 def step_impl(context):

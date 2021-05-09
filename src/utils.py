@@ -82,3 +82,10 @@ def save_as_file(content, filename, filetype, location):
     file.write(content)
     file.close()
     return file
+
+def check_if_folder_exists(path):
+    """
+    :param path: path for file
+    :return: bool
+    """
+    return os.path.isdir(path)
