@@ -81,6 +81,12 @@ class TestUtils:
     def test_integer_value(self, value, expected):
         assert validate_integer(value) == expected
 
+    @mock.patch('src.utils.os')
+    def test_check_folder_exists_func(self, mock_os):
+        check_if_folder_exists('test')
+        mock_os.path.isdir.assert_called_once()
+
+
 
 
 
