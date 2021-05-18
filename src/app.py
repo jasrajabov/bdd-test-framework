@@ -4,7 +4,6 @@ from logfiles.log import logging
 
 app = ReportGenerator('Desktop/ftp-files', 'Desktop/output_files')
 
-
 interval = 5
 
 if __name__ == "__main__":
