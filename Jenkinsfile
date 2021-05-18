@@ -25,7 +25,7 @@ pipeline {
         always {
             emailext body: 'BUILD STATS: $DEFAULT_CONTENT',
             subject: '$DEFAULT_SUBJECT',
-            to: 'jas.rajabov@gmail.com, razhabov@yahoo.com'
+            to: 'razhabov@yahoo.com'
         }
     }
 }
