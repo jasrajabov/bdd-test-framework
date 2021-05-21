@@ -2,9 +2,16 @@ pipeline {
     agent any
     triggers {
     //runs every 15 min between 1-2 pm every weekend
-        cron('H/15 13-14 * * 6-7')
+        cron('H/30 13-14 * * 6-7')
     }
     stages {
+
+        stage('User Input') {
+            steps {
+                input('Do you want to proceed?')
+            }
+        }
+
         stage('Tests') {
             parallel {
                 stage('Pytest') {
