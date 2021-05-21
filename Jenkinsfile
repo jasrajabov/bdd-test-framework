@@ -11,7 +11,6 @@ pipeline {
                 input('Do you want to proceed?')
             }
         }
-
         stage('Tests') {
             parallel {
                 stage('Pytest') {
