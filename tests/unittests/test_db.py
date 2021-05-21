@@ -70,7 +70,7 @@ def test_insert_row(mock_log, mock_random, mocked_conn):
     mock_log.error.assert_called()
 
     """
-    test
+    test_
     """
 
 
