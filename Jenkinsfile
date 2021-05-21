@@ -37,5 +37,16 @@ pipeline {
             subject: '$DEFAULT_SUBJECT',
             to: 'razhabov@yahoo.com'
         }
+        always {
+            script {
+              allure([
+                includeProperties: false,
+                jdk: '',
+                properties: [],
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure_results']]
+              ])
+            }
+          }
     }
 }
