@@ -5,6 +5,13 @@ pipeline {
         cron('H/15 13-14 * * 6-7')
     }
     stages {
+
+        stage('Docker_test') {
+            steps {
+                sh 'docker build -t dckr_pytest'
+                sh 'docker run --rm dckr_pytest'
+            }
+        }
         stage('Pytest') {
             steps {
                 echo 'Executing pytest unittest'
