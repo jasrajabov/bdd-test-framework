@@ -6,13 +6,8 @@ pipeline {
     }
     stages {
 
-        stage('Docker_test') {
-            steps {
-                sh 'docker build -t dckr_pytest'
-                sh 'docker run --rm dckr_pytest'
-            }
-        }
-        stage('Pytest') {
+        parallel {
+           stage('Pytest') {
             steps {
                 echo 'Executing pytest unittest'
                 sh 'ls'
@@ -27,6 +22,8 @@ pipeline {
                 sh 'python3 -m behave -f allure_behave.formatter:AllureFormatter -o allure_results tests/features'
             }
         }
+    }
+
     }
     post {
         always {
