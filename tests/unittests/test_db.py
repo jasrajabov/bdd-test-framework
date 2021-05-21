@@ -69,7 +69,9 @@ def test_insert_row(mock_log, mock_random, mocked_conn):
     dbManager().insert_db_record(data)
     mock_log.error.assert_called()
 
-
+    """
+    test
+    """
 
 
 
