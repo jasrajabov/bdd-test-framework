@@ -5,12 +5,6 @@ pipeline {
         cron('H/30 13-14 * * 6-7')
     }
     stages {
-
-        stage('User Input') {
-            steps {
-                input('Do you want to proceed?')
-            }
-        }
         stage('Tests') {
             parallel {
                 stage('Pytest') {
